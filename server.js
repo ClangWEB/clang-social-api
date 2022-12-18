@@ -29,7 +29,7 @@ const connect = () => {
     .catch((err) => console.log("Error trying to connect to DB", err))
 };
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   connect();
   console.log(`Server is running on port ${PORT}..`);

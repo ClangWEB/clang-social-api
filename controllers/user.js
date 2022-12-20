@@ -86,9 +86,12 @@ exports.register = async (req, res) => {
 
 exports.activateAccount = async (req, res) => {
   try {
+    const validUser = req.user.id;
     const { token } = req.body;
     const user = jwt.verify(token, process.env.TOKEN_SECRET)
     const check = await User.findById(user.id)
+
+    if (validUser !== user.id) return res.status(400).json({ message: "You don't have the authorization to complete this operation." });
     if (check.verified == true) return res.status(400).json({ message: "Email already activated" });
     else {
       await User.findByIdAndUpdate(user.id, { verified: true });
@@ -102,12 +105,12 @@ exports.activateAccount = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if(!user) return res.status(400).json({message: "User doesn't exists"}); 
+    if (!user) return res.status(400).json({ message: "User doesn't exists" });
 
     const check = await bcrypt.compare(password, user.password);
-    if(!check) return res.status(400).json({message: "Password doesn't match. Try again!"});
+    if (!check) return res.status(400).json({ message: "Password doesn't match. Try again!" });
     const token = generateToken({ id: user._id.toString() }, "7d");
 
     res.send({
@@ -124,3 +127,4 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+

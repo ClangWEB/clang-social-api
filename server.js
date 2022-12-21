@@ -30,6 +30,7 @@ readdirSync("./routes").map((r) => app.use("/", require('./routes/' + r)));
 //     .catch((err) => console.log("Error trying to connect to DB", err))
 // };
 
+mongoose.set('strictQuery', false);
 mongoose.connect(
   process.env.DATABASE_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },

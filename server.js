@@ -21,19 +21,24 @@ readdirSync("./routes").map((r) => app.use("/", require('./routes/' + r)));
 
 // DATABASE
 
-// mongoose.connect(process.env.DATABASE_URL, {
-//   useNewUrlParser: true,
-// })
+// const connect = () => {
+//   mongoose.set('strictQuery', false);
+//   mongoose.connect(process.env.DATABASE_URL, {
+//     useNewUrlParser: true,
+//   })
+//     .then(() => console.log("Connected to DB"))
+//     .catch((err) => console.log("Error trying to connect to DB", err))
+// };
 
-const connect = () => {
-  mongoose.set('strictQuery', false);
-  mongoose.connect(process.env.DATABASE_URL)
-    .then(() => console.log("Connected to DB"))
-    .catch((err) => console.log("Error trying to connect to DB", err))
-};
+mongoose.connect(
+  process.env.DATABASE_URL,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log('Connected to MongoDB');
+  }
+);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  connect();
   console.log(`Server is running on port ${PORT}..`);
 });

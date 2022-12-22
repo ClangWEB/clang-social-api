@@ -10,27 +10,27 @@ const auth = new OAuth2(MAILING_ID, MAILING_SECRET, MAILING_REFRESH, oauth_link)
 
 // SEND VERIFICATION EMAIL
 exports.sendVerificationEmail = (email, name, url) => {
-    auth.setCredentials({
-        refresh_token: MAILING_REFRESH,
-    });
+  auth.setCredentials({
+    refresh_token: MAILING_REFRESH,
+  });
 
-    const accessToken = auth.getAccessToken();
-    const stmp = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: EMAIL,
-            clientId: MAILING_ID,
-            clientSecret: MAILING_SECRET,
-            refreshToken: MAILING_REFRESH,
-            accessToken,
-        },
-    });
-    const mailOptions = {
-        from: EMAIL,
-        to: email,
-        subject: "Clang Social Account Verification",
-        html: `
+  const accessToken = auth.getAccessToken();
+  const stmp = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: EMAIL,
+      clientId: MAILING_ID,
+      clientSecret: MAILING_SECRET,
+      refreshToken: MAILING_REFRESH,
+      accessToken,
+    },
+  });
+  const mailOptions = {
+    from: EMAIL,
+    to: email,
+    subject: "Clang Social Account Verification",
+    html: `
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif">
  <head>
@@ -103,7 +103,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:204px">
                    <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="left" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:5px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/ClangSocial_Reset_t3xgbk.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" title="Logo" width="105"></a></td>
+                      <td align="left" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:5px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/ClangSocial_Reset_t3xgbk_yjwb2k.png" alt="Clang Social Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" title="Logo" width="105"></a></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -151,7 +151,7 @@ a[x-apple-data-detectors] {
                   <td align="left" class="es-m-p20b" style="padding:0;Margin:0;width:280px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="images/banner.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="280"></td>
+                      <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/banner_cc1xkp.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="280"></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -196,7 +196,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704748/Email/people1_joj3ap.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Angelina</strong></p></td>
@@ -213,7 +213,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704748/Email/people2_ld9v7t.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Diana</strong></p></td>
@@ -229,7 +229,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people3.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704748/Email/people3_kvicha.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Shubham</strong></p></td>
@@ -248,7 +248,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people4.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704749/Email/people4_g3gsw1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Pratik</strong></p></td>
@@ -265,7 +265,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people5.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704749/Email/people5_sbapc4.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Marina</strong></p></td>
@@ -281,10 +281,10 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" align="center" style="padding:0;Margin:0;width:190px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:15px;background-color:#ffffff" bgcolor="#ffffff" role="presentation">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="images/people6.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/people6_yaapdb.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="77"></td>
                      </tr>
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Denis</strong></p></td>
+                      <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><strong>Aniket</strong></p></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;padding-bottom:20px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><em>800k&nbsp;Followers</em></p></td>
@@ -351,7 +351,7 @@ a[x-apple-data-detectors] {
                   <td align="left" style="padding:0;Margin:0;width:208px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="images/gifan2.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="185"></td>
+                      <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/gifan2_l08wrl.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="185"></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -399,7 +399,7 @@ a[x-apple-data-detectors] {
                   <td align="left" style="padding:0;Margin:0;width:208px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" class="es-m-p20t" style="padding:0;Margin:0;font-size:0px"><img src="images/gifan31.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="185"></td>
+                      <td align="center" class="es-m-p20t" style="padding:0;Margin:0;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704749/Email/gifan31_jg8wwi.gif" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="185"></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -425,7 +425,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p20b" align="left" style="padding:0;Margin:0;width:290px">
                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#ffffff;border-radius:15px" role="presentation">
                      <tr>
-                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="images/q1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
+                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/q1_lxc5e2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
                      </tr>
                      <tr>
                       <td align="left" style="padding:0;Margin:0;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><em><strong>@Pratik</strong></em></p></td>
@@ -437,8 +437,8 @@ a[x-apple-data-detectors] {
                       <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px">
                        <table border="0" class="es-table cke_show_border" cellspacing="1" cellpadding="1" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" role="presentation">
                          <tr>
-                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/hart1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
-                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/us.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/hart1_gace1o.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704751/Email/us_eiuaz2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -450,7 +450,7 @@ a[x-apple-data-detectors] {
                   <td align="left" style="padding:0;Margin:0;width:290px">
                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#ffffff;border-radius:15px" role="presentation">
                      <tr>
-                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="images/q2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
+                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/q2_yntmnn.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
                      </tr>
                      <tr>
                       <td align="left" style="padding:0;Margin:0;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><em><strong>@Marina</strong></em></p></td>
@@ -462,8 +462,8 @@ a[x-apple-data-detectors] {
                       <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px">
                        <table border="0" class="es-table cke_show_border" cellspacing="1" cellpadding="1" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" role="presentation">
                          <tr>
-                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/hart1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
-                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/us.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/hart1_gace1o.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704751/Email/us_eiuaz2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -478,7 +478,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p20b" align="left" style="padding:0;Margin:0;width:290px">
                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#ffffff;border-radius:15px" role="presentation">
                      <tr>
-                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="images/q3.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
+                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/q3_w3ei8y.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
                      </tr>
                      <tr>
                       <td align="left" style="padding:0;Margin:0;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><em><strong>@Shubham</strong></em></p></td>
@@ -490,8 +490,8 @@ a[x-apple-data-detectors] {
                       <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px">
                        <table border="0" class="es-table cke_show_border" cellspacing="1" cellpadding="1" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" role="presentation">
                          <tr>
-                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/hart1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
-                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/us.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/hart1_gace1o.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704751/Email/us_eiuaz2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -503,7 +503,7 @@ a[x-apple-data-detectors] {
                   <td align="left" style="padding:0;Margin:0;width:290px">
                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#ffffff;border-radius:15px" role="presentation">
                      <tr>
-                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="images/q41.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
+                      <td align="center" style="Margin:0;padding-bottom:15px;padding-top:20px;padding-left:20px;padding-right:20px;font-size:0px"><img class="adapt-img" src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704750/Email/q41_rstt0u.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;border-radius:15px;border-collapse:separate" width="250"></td>
                      </tr>
                      <tr>
                       <td align="left" style="padding:0;Margin:0;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;line-height:21px;color:#000F26;font-size:14px"><em><strong>@Angelina</strong></em></p></td>
@@ -515,8 +515,8 @@ a[x-apple-data-detectors] {
                       <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px">
                        <table border="0" class="es-table cke_show_border" cellspacing="1" cellpadding="1" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" role="presentation">
                          <tr>
-                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/hart1.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
-                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="images/us.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;width:35px;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/hart1_gace1o.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
+                          <td align="left" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://cs-demo.netlify.app/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#000F26;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704751/Email/us_eiuaz2.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="22"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -551,13 +551,13 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:560px">
                    <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:5px;padding-bottom:20px;font-size:0px"><img src="images/ClangSocial_Reset_t3xgbk.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="119"></td>
+                      <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:5px;padding-bottom:20px;font-size:0px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/ClangSocial_Reset_t3xgbk_yjwb2k.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="119"></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;font-size:0">
                        <table cellpadding="0" cellspacing="0" class="es-table-not-adapt es-social" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="center" valign="top" style="padding:0;Margin:0"><a target="_blank" href="https://cs-demo.netlify.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img src="images/icon.png" alt="CS" title="Clang Social" width="32" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
+                          <td align="center" valign="top" style="padding:0;Margin:0"><a target="_blank" href="https://cs-demo.netlify.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704747/Email/icon_fhqf30.png" alt="CS" title="Clang Social" width="32" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -575,7 +575,7 @@ a[x-apple-data-detectors] {
                   <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
                    <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td class="es-infoblock made_with" align="center" style="padding:0;Margin:0;line-height:0px;font-size:0px;color:#CCCCCC"><a target="_blank" href="mailto:clang.web@gmail.com" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#CCCCCC;font-size:12px"><img src="images/Transparent_Merry_Christmas_New_Year.png" alt width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
+                      <td class="es-infoblock made_with" align="center" style="padding:0;Margin:0;line-height:0px;font-size:0px;color:#CCCCCC"><a target="_blank" href="mailto:clang.web@gmail.com" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#CCCCCC;font-size:12px"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671704751/Email/Transparent_Merry_Christmas_New_Year_z6zamw.png" alt width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -590,39 +590,39 @@ a[x-apple-data-detectors] {
  </body>
 </html>
         `
-    };
-    stmp.sendMail(mailOptions, (err, res) => {
-        if (err) return err;
-        return res;
-    })
+  };
+  stmp.sendMail(mailOptions, (err, res) => {
+    if (err) return err;
+    return res;
+  })
 };
 
 // SEND RESET CODE
 exports.sendResetCode = (email, name, code) => {
-    auth.setCredentials({
-        refresh_token: MAILING_REFRESH,
-    });
+  auth.setCredentials({
+    refresh_token: MAILING_REFRESH,
+  });
 
-    const accessToken = auth.getAccessToken();
-    const stmp = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: EMAIL,
-            clientId: MAILING_ID,
-            clientSecret: MAILING_SECRET,
-            refreshToken: MAILING_REFRESH,
-            accessToken,
-        },
-    });
-    const mailOptions = {
-        from: EMAIL,
-        to: email,
-        subject: "Clang Social Reset User Password",
-        html: `<div style="max-width:screen;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-weight:600;color:#f51997"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671128285/Clang-Social/cs_vm6e6x.png" alt="Clang Social" style="width:30px"><span>Action: Activate your Clang Social account</span></div><div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1rem 0;border-top:1px solid silver;border-bottom:1px solid silver;color:#141823;font-style:17px;font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif"><span>Hello ${name},</span><div style="padding:20px 0"><span style="padding:1.5rem 0">Welcome to the family. Before continuing, you have one final task to complete which is to confirm your account.</span></div><a style="display:flex;justify-content:center;align-items:center;width:200px;padding:10px 15px;background-color:#f51997;color:#fff;text-decoration:none;font-weight:600">${code}</a><br><div style="padding-top:20px"><span style="margin:1.5rem 0;color:gray">Clang Social | Post Anything, Anytime, Anywhere</span></div></div>`
-    };
-    stmp.sendMail(mailOptions, (err, res) => {
-        if (err) return err;
-        return res;
-    })
+  const accessToken = auth.getAccessToken();
+  const stmp = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: EMAIL,
+      clientId: MAILING_ID,
+      clientSecret: MAILING_SECRET,
+      refreshToken: MAILING_REFRESH,
+      accessToken,
+    },
+  });
+  const mailOptions = {
+    from: EMAIL,
+    to: email,
+    subject: "Clang Social Reset User Password",
+    html: `<div style="max-width:screen;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-weight:600;color:#f51997"><img src="https://res.cloudinary.com/diqbu4moc/image/upload/v1671128285/Clang-Social/cs_vm6e6x.png" alt="Clang Social" style="width:30px"><span>Action: Activate your Clang Social account</span></div><div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1rem 0;border-top:1px solid silver;border-bottom:1px solid silver;color:#141823;font-style:17px;font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif"><span>Hello ${name},</span><div style="padding:20px 0"><span style="padding:1.5rem 0">Welcome to the family. Before continuing, you have one final task to complete which is to confirm your account.</span></div><a style="display:flex;justify-content:center;align-items:center;width:200px;padding:10px 15px;background-color:#f51997;color:#fff;text-decoration:none;font-weight:600">${code}</a><br><div style="padding-top:20px"><span style="margin:1.5rem 0;color:gray">Clang Social | Post Anything, Anytime, Anywhere</span></div></div>`
+  };
+  stmp.sendMail(mailOptions, (err, res) => {
+    if (err) return err;
+    return res;
+  })
 };

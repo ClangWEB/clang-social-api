@@ -8,6 +8,32 @@ const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const generateCode = require("../helpers/generateCode");
 
 
+// LOGIN
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "User doesn't exists" });
+
+    const check = await bcrypt.compare(password, user.password);
+    if (!check) return res.status(400).json({ message: "Password doesn't match. Try again!" });
+    const token = generateToken({ id: user._id.toString() }, "7d");
+
+    res.send({
+      id: user._id,
+      username: user.username,
+      picture: user.picture,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      token: token,
+      verified: user.verified,
+    })
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // REGISTER
 exports.register = async (req, res) => {
   try {
@@ -108,32 +134,6 @@ exports.activateAccount = async (req, res) => {
   }
 };
 
-// LOGIN
-exports.login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "User doesn't exists" });
-
-    const check = await bcrypt.compare(password, user.password);
-    if (!check) return res.status(400).json({ message: "Password doesn't match. Try again!" });
-    const token = generateToken({ id: user._id.toString() }, "7d");
-
-    res.send({
-      id: user._id,
-      username: user.username,
-      picture: user.picture,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      token: token,
-      verified: user.verified,
-    })
-  }
-  catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 // SEND VERIFIVATION
 exports.sendVerification = async (req, res) => {
   try {
@@ -181,17 +181,15 @@ exports.sendResetPasswordCode = async (req, res) => {
     const user = await User.findOne({ email }).select("-password");
     await Code.findOneAndRemove({ user: user._id });
     const code = generateCode(5);
-
     const savedCode = await new Code({
       code,
       user: user._id,
     }).save();
     sendResetCode(user.email, user.first_name, code);
     return res.status(200).json({
-      message: "Password reset code has been sent to your email.",
-    })
-  }
-  catch (error) {
+      message: "Email reset code has been sent to your email",
+    });
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -201,15 +199,15 @@ exports.validateResetCode = async (req, res) => {
   try {
     const { email, code } = req.body;
     const user = await User.findOne({ email });
-    const DBcode = await Code.findOne({user: user._id});
+    const DBcode = await Code.findOne({ user: user._id });
 
-    if(DBcode.code !== code) {
+    if (DBcode.code !== code) {
       return res.status(400).json({
         message: "Verification code doesn't match with the entered code."
       });
     }
-    return res.status(200).json({message: "Code is OK!"});
-  } 
+    return res.status(200).json({ message: "Code is OK!" });
+  }
   catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -220,9 +218,9 @@ exports.changePassword = async (req, res) => {
   const { email, password } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, 12);
-  await User.findOneAndUpdate({email}, {
+  await User.findOneAndUpdate({ email }, {
     password: encryptedPassword,
   });
 
-  return res.status(200).json({message: "Password is changed!"});
+  return res.status(200).json({ message: "Password is changed!" });
 }

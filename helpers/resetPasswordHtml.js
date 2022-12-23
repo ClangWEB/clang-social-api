@@ -1,4 +1,4 @@
-function resetPasswordHtml({name, code}) {
+function resetPasswordHtml(name, code) {
     let html = `
     <!DOCTYPE html>
 

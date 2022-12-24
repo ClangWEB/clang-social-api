@@ -592,25 +592,6 @@ function accountVerificationHtml(name, url) {
                                                                         Download app ➙
                                                                     </a></span></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td align="left" style="padding:0;Margin:0;width:376px">
-                                                                <table width="100%" cellspacing="0" cellpadding="0"
-                                                                    role="presentation"
-                                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                                    <tr>
-                                                                        <td align="right" class="es-m-txt-c"
-                                                                            style="padding:0;Margin:0"><span
-                                                                                class="msohide es-button-border"
-                                                                                style="border-style:solid;border-color:#060606;background:#000F26;border-width:0px;display:inline-block;border-radius:3px;width:auto;mso-hide:all"><a
-                                                                                    href="https://play.google.com/store/apps/details?id=com.casuals4fun.clang_social"
-                                                                                    class="es-button es-button-1"
-                                                                                    target="_blank"
-                                                                                    style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#000F26;border-width:13px 20px;display:inline-block;background:#000F26;border-radius:3px;font-family:Montserrat, 'Google Sans', 'Segoe UI', Roboto, Arial, Ubuntu, sans-serif;font-weight:bold;font-style:normal;line-height:14px;width:auto;text-align:center">Download
-                                                                                    app ➙</a></span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </td>
                                             </tr>

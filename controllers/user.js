@@ -14,11 +14,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "User doesn't exists" });
-
     const check = await bcrypt.compare(password, user.password);
     if (!check) return res.status(400).json({ message: "Password doesn't match. Try again!" });
     const token = generateToken({ id: user._id.toString() }, "7d");
-
     res.send({
       id: user._id,
       username: user.username,
@@ -27,7 +25,7 @@ exports.login = async (req, res) => {
       last_name: user.last_name,
       token: token,
       verified: user.verified,
-    })
+    });
   }
   catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,16 +1,5 @@
 const Post = require("../models/Post");
 
-// CREATE POST
-exports.createPost = async (req, res) => {
-    try {
-        const post = await new Post(req.body).save();
-        res.json(post);
-    }
-    catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
-}
-
 // SHOW ALL POSTS
 exports.getAllPosts = async (req, res) => {
     try {
@@ -21,6 +10,17 @@ exports.getAllPosts = async (req, res) => {
         res.json(posts);
     }
     catch (error) {
+        return res.status(500).json({ message: error.message });   
+    }
+};
+
+// CREATE POST
+exports.createPost = async (req, res) => {
+    try {
+        const post = await new Post(req.body).save();
+        res.json(post);
+    }
+    catch (error) {
         return res.status(500).json({ message: error.message });
     }
-}
+};

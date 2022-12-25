@@ -6,6 +6,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
+// IMAGES UPLOAD
 exports.uploadImages = async (req, res) => {
     try {
         const { path } = req.body;
@@ -23,6 +24,13 @@ exports.uploadImages = async (req, res) => {
     }
 };
 
+// LIST PROFILE IMAGES
+exports.listImages = async (req, res) => {
+    const { path, sort, max } = req.body;
+    cloudinary.v2.search.expression(`${path}`).sort_by("created_at", `${sort}`).max_results(max).execute().then((result) => {res.json(result)}).catch((err)=>{console.log(err.error.message)});
+};
+
+// UPLOAD TO CLOUDINARY
 const uploadToCloudinary = async (file, path) => {
     return new Promise((resolve) => {
         cloudinary.v2.uploader.upload(
@@ -43,6 +51,7 @@ const uploadToCloudinary = async (file, path) => {
     });
 };
 
+// REMOVE TEMP FILES
 const removeTmp = (path) => {
     fs.unlink(path, (err) => {
         if (err) throw err;

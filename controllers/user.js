@@ -230,7 +230,7 @@ exports.getProfile = async (req, res) => {
     const { username } = req.params;
     const profile = await User.findOne({ username }).select("-password");
     if (!profile) return res.json({ ok: false });
-    const posts = await Post.find({ user: profile._id }).populate("user");
+    const posts = await Post.find({ user: profile._id }).sort({ createdAt: -1 }).populate("user");
     return res.status(200).json({ ...profile.toObject(), posts });
   }
   catch (error) {

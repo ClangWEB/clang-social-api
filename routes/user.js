@@ -1,5 +1,5 @@
 const express = require("express");
-const { 
+const {
     login,
     register,
     activateAccount,
@@ -9,6 +9,7 @@ const {
     validateResetCode,
     changePassword,
     getProfile,
+    updateProfilePicture,
 } = require("../controllers/user");
 const { authUser } = require("../middlewares/auth");
 
@@ -23,5 +24,6 @@ router.post("/sendResetPasswordCode", sendResetPasswordCode);
 router.post("/validateResetCode", validateResetCode);
 router.post("/changePassword", changePassword);
 router.get("/getProfile/:username", authUser, getProfile);
+router.put("/updateProfilePicture", authUser, updateProfilePicture);
 
 module.exports = router;

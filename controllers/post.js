@@ -5,7 +5,7 @@ exports.getAllPosts = async (req, res) => {
     try {
         const posts = await Post
             .find()
-            .populate("user", "first_name last_name picture username gender")
+            .populate("user", "first_name last_name picture cover username gender")
             .sort({ createdAt: -1 });
         res.json(posts);
     }

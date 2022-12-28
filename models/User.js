@@ -98,6 +98,9 @@ const userSchema = mongoose.Schema({
         otherName: {
             type: String,
         },
+        // hobby: {
+        //     type:String
+        // },
         job: {
             type: String,
         },
@@ -123,6 +126,9 @@ const userSchema = mongoose.Schema({
         instagram: {
             type: String,
         },
+        otherLinks: {
+            type: String,
+        }
     },
     savedPosts: [
         {

@@ -222,7 +222,7 @@ exports.changePassword = async (req, res) => {
   });
 
   return res.status(200).json({ message: "Password is changed!" });
-}
+};
 
 // PROFILE
 exports.getProfile = async (req, res) => {
@@ -236,7 +236,7 @@ exports.getProfile = async (req, res) => {
   catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 // UPDATE PROFILE PICTURE
 exports.updateProfilePicture = async (req, res) => {
@@ -246,8 +246,22 @@ exports.updateProfilePicture = async (req, res) => {
       picture: url,
     });
     res.json(url);
-  } 
+  }
   catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
+
+// UPDATE COVER PICTURE
+exports.updateCover = async (req, res) => {
+  try {
+    const { url } = req.body;
+    await User.findByIdAndUpdate(req.user.id, {
+      cover: url,
+    });
+    res.json(url);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

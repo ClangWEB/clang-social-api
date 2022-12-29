@@ -67,11 +67,11 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    friends: {
+    following: {
         type: Array,
         default: [],
     },
-    following: {
+    friends: {
         type: Array,
         default: [],
     },
@@ -121,7 +121,7 @@ const userSchema = mongoose.Schema({
         },
         relationship: {
             type: String,
-            enum: ["Single", "In a Relationship", "Married", "Divorced", "Can't say that"],
+            enum: ["Single", "In a Relationship", "Married", "Divorced", ""],
         },
         instagram: {
             type: String,

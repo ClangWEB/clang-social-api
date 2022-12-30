@@ -229,21 +229,34 @@ exports.getProfile = async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findById(req.user.id);
-    const profile = await User.findOne({ username }).select("-password");
+    const profile = await User.findOne({ username }).select("-password")
     const friendship = {
       friends: false,
       following: false,
       requestSent: false,
       requestReceived: false,
-    }
+    };
 
     if (!profile) return res.json({ ok: false });
-    if (user.friends.includes(profile._id) && profile.friends.includes(user._id)) friendship.friends = true;
-    if (user.following.includes(profile._id)) friendship.following = true;
-    if (user.requests.includes(profile._id)) friendship.requestReceived = true;
-    if (profile.requests.includes(user._id)) friendship.requestSent = true;
+
+    if (
+      user.friends.includes(profile._id) &&
+      profile.friends.includes(user._id)
+    ) {
+      friendship.friends = true;
+    }
+    if (user.following.includes(profile._id)) {
+      friendship.following = true;
+    }
+    if (user.requests.includes(profile._id)) {
+      friendship.requestReceived = true;
+    }
+    if (profile.requests.includes(user._id)) {
+      friendship.requestSent = true;
+    }
 
     const posts = await Post.find({ user: profile._id }).populate("user").sort({ createdAt: -1 });
+    await profile.populate("friends", "first_name last_name username picture");
     res.json({ ...profile.toObject(), posts, friendship });
   }
   catch (error) {
@@ -395,7 +408,7 @@ exports.unfollow = async (req, res) => {
       const sender = await User.findById(req.user.id);
       const receiver = await User.findById(req.params.id);
       if (
-        receiver.followers.includes(sender._id) &&
+        receiver.followers.includes(sender._id) ||
         sender.following.includes(receiver._id)
       ) {
         await receiver.updateOne({
@@ -426,13 +439,13 @@ exports.acceptRequest = async (req, res) => {
       if (receiver.requests.includes(sender._id)) {
         await User.bulkWrite([
           {
-            updateOne: {
+            updateMany: {
               filter: { _id: receiver },
               update: { $push: { friends: sender._id, following: sender._id } },
             },
           },
           {
-            updateOne: {
+            updateMany: {
               filter: { _id: sender },
               update: { $push: { friends: receiver._id, followers: receiver._id } },
             },
@@ -442,7 +455,7 @@ exports.acceptRequest = async (req, res) => {
               filter: { _id: receiver },
               update: { $pull: { requests: sender._id } },
             },
-          }
+          },
         ]);
         res.json({ message: "friend request accepted" });
       } else {
@@ -465,12 +478,22 @@ exports.unfriend = async (req, res) => {
       const sender = await User.findById(req.user.id);
       const receiver = await User.findById(req.params.id);
       if (receiver.friends.includes(sender._id) && sender.friends.includes(receiver._id)) {
-        await receiver.updateMany({
-          $pull: { friends: sender._id, following: sender._id, followers: sender._id },
-        });
-        await sender.updateMany({
-          $pull: { friends: receiver._id, following: receiver._id, followers: receiver._id },
-        });
+        await User.bulkWrite([
+          {
+            updateMany: {
+              filter: { _id: receiver },
+              update: { $pull: { friends: sender._id, followers: sender._id } },
+              // update: { $pull: { friends: sender._id, following: sender._id, followers: sender._id } },
+            },
+          },
+          {
+            updateMany: {
+              filter: { _id: sender },
+              update: { $pull: { friends: receiver._id, followers: receiver._id } },
+              // update: { $pull: { friends: receiver._id, following: receiver._id, followers: receiver._id } },
+            },
+          },
+        ]);
         res.json({ message: "Unfriend request accepted." });
       } else {
         return res.status(400).json({ message: "Already unfriended." });
@@ -492,12 +515,20 @@ exports.deleteRequest = async (req, res) => {
       const receiver = await User.findById(req.user.id);
       const sender = await User.findById(req.params.id);
       if (receiver.requests.includes(sender._id)) {
-        await receiver.updateMany({
-          $pull: { requests: sender._id, followers: sender._id },
-        });
-        await sender.updateOne({
-          $pull: { following: receiver._id },
-        });
+        await User.bulkWrite([
+          {
+            updateMany: {
+              filter: { _id: receiver },
+              update: { $pull: { requests: sender._id, followers: sender._id } },
+            },
+          },
+          {
+            updateOne: {
+              filter: { _id: sender },
+              update: { $pull: { following: receiver._id } },
+            },
+          },
+        ]);
         res.json({ message: "Delete request accepted." });
       } else {
         return res.status(400).json({ message: "Already deleted request." });

@@ -1,0 +1,190 @@
+(node:1924) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:1924) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+
+exports.addFriend = async (req, res) => {
+  const senderID = req.user.id;
+  const receiverID = req.params.id;
+
+  if (senderID === receiverID)
+    return res
+      .status(400)
+      .json({ message: "You can't send a request to yourself!" });
+
+  try {
+    const receiver = await User.findById(req.params.id);
+    if (receiver.requests.includes(senderID) && receiver.friends.includes(senderID))
+      return res.status(400).json({ message: 'Already Sent.' });
+
+    await User.bulkWrite([
+      {
+        updateOne: {
+          filter: { _id: senderID },
+          update: { $push: { following: receiverID } },
+        },
+      },
+      {
+        updateOne: {
+          filter: { _id: receiverID },
+          update: { $push: { requests: senderID, followers: senderID } },
+        },
+      },
+    ]);
+    res.json({ message: "Friend request has been sent." });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.cancelRequest = async (req, res) => {
+  const senderID = req.user.id;
+  const receiverID = req.params.id;
+
+  if (senderID === receiverID)
+    return res
+      .status(400)
+      .json({ message: "You can't cancel a request to yourself" });
+
+  try {
+    const receiver = await User.findById(req.params.id);
+    if (!receiver.requests.includes(senderID) && receiver.friends.includes(senderID))      // CHANGE HERE TO || <--------------------
+      return res.status(400).json({ message: 'Already Cancelled' });
+
+    await User.bulkWrite([
+      {
+        updateOne: {
+          filter: { _id: senderID },
+          update: { $pull: { following: senderID } },
+        },
+      },
+      {
+        updateOne: {
+          filter: { _id: receiverID },
+          update: { $pull: { requests: senderID, followers: senderID } },
+        },
+      },
+    ]);
+    // res.json({ message: "Friend request has been cancelled." });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// FOLLOW
+exports.follow = async (req, res) => {
+  const senderID = req.user.id;
+  const receiverID = req.params.id;
+
+  if (senderID === receiverID)
+    return res
+      .status(400)
+      .json({ message: "You can't follow yourself" });
+
+  try {
+    const sender = await User.findById(req.user.id);
+    const receiver = await User.findById(req.params.id);
+    if (receiver.followers.includes(senderID) && sender.following.includes(receiverID))
+      return res.status(400).json({ message: 'Already Following' });
+
+    await User.bulkWrite([
+      {
+        updateOne: {
+          filter: { _id: senderID },
+          update: { $push: { following: receiverID } },
+        },
+      },
+      {
+        updateOne: {
+          filter: { _id: receiverID },
+          update: { $push: { followers: senderID } },
+        },
+      },
+    ]);
+    // res.json({ message: "Follow success." });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// UNFOLLOW
+exports.unfollow = async (req, res) => {
+  const senderID = req.user.id;
+  const receiverID = req.params.id;
+
+  if (senderID === receiverID)
+    return res
+      .status(400)
+      .json({ message: "You can't unfollow to yourself" });
+
+  try {
+    const sender = await User.findById(req.user.id);
+    const receiver = await User.findById(req.params.id);
+    if (!receiver.followers.includes(senderID) && !sender.following.includes(receiverID))
+      return res.status(400).json({ message: 'Already not following' });
+
+    await User.bulkWrite([
+      {
+        updateOne: {
+          filter: { _id: senderID },
+          update: { $pull: { following: receiverID } },
+        },
+      },
+      {
+        updateOne: {
+          filter: { _id: receiverID },
+          update: { $pull: { followers: senderID } },
+        },
+      },
+    ]);
+    // res.json({ message: "Unfollow success." });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ACCEPT REQUEST
+exports.acceptRequest = async (req, res) => {
+  const receiverID = req.user.id;
+  const senderID = req.params.id;
+
+  if (senderID === receiverID)
+    return res
+      .status(400)
+      .json({ message: "You can't accept a request from  yourself!" });
+
+  try {
+    const receiver = await User.findById(req.user.id);
+    const sender = await User.findById(req.params.id);
+    if (!receiver.requests.includes(senderID))
+      return res.status(400).json({ message: 'Already friends.' });
+
+    await User.bulkWrite([
+      {
+        update: {
+          filter: { _id: receiverID },
+          update: { $push: { friends: sender._id, following: senderID } },
+        },
+      },
+      {
+        update: {
+          filter: { _id: senderID },
+          update: { $push: { friends: receiverID, followers: receiverID } },
+        },
+      },
+      {
+        updateOne: {
+          filter: { _id: receiverID },
+          update: { $pull: { requests: senderID } },
+        },
+      },
+    ]);
+    // res.json({ message: "Friend request accepted." });
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

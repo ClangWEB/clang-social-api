@@ -25,7 +25,10 @@ exports.sendVerificationEmail = (email, name, url) => {
             clientId: MAILING_ID,
             clientSecret: MAILING_SECRET,
             refreshToken: MAILING_REFRESH,
-            accessToken,
+            accessToken: accessToken,
+        },
+        tls: {
+            rejectUnauthorized: false,
         },
     });
     const mailOptions = {
@@ -55,7 +58,10 @@ exports.sendResetCode = (email, name, code) => {
             clientId: MAILING_ID,
             clientSecret: MAILING_SECRET,
             refreshToken: MAILING_REFRESH,
-            accessToken,
+            accessToken: accessToken,
+        },
+        tls: {
+            rejectUnauthorized: false,
         },
     });
     const mailOptions = {

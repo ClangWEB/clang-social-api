@@ -67,22 +67,22 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    following: {
-        type: Array,
-        default: [],
-    },
-    friends: {
-        type: Array,
-        default: [],
-    },
-    followers: {
-        type: Array,
-        default: [],
-    },
-    requests: {
-        type: Array,
-        default: [],
-    },
+    friends: [{
+        type: ObjectId,
+        ref: "User",
+    }],
+    following: [{
+        type: ObjectId,
+        ref: "User",
+    }],
+    followers: [{
+        type: ObjectId,
+        ref: "User",
+    }],
+    requests: [{
+        type: ObjectId,
+        ref: "User",
+    }],
     search: [
         {
             user: {
@@ -148,4 +148,4 @@ const userSchema = mongoose.Schema({
     }
 );
 
-module.exports=mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);

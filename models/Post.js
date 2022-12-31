@@ -37,7 +37,6 @@ const postSchema = new mongoose.Schema(
                 },
                 commentAt: {
                     type: Date,
-                    default: new Date(),
                     required: true,
                 },
             },

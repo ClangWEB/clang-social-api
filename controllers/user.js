@@ -255,7 +255,11 @@ exports.getProfile = async (req, res) => {
       friendship.requestSent = true;
     }
 
-    const posts = await Post.find({ user: profile._id }).populate("user").sort({ createdAt: -1 });
+    const posts = await Post
+      .find({ user: profile._id })
+      .populate("user")
+      .populate("comments.commentBy", "first_name last_name picture username commentAt")
+      .sort({ createdAt: -1 });
     await profile.populate("friends", "first_name last_name username picture");
     res.json({ ...profile.toObject(), posts, friendship });
   }
@@ -482,15 +486,15 @@ exports.unfriend = async (req, res) => {
           {
             updateMany: {
               filter: { _id: receiver },
-              update: { $pull: { friends: sender._id, followers: sender._id } },
-              // update: { $pull: { friends: sender._id, following: sender._id, followers: sender._id } },
+              // update: { $pull: { friends: sender._id, followers: sender._id } },     // MY
+              update: { $pull: { friends: sender._id, following: sender._id, followers: sender._id } },
             },
           },
           {
             updateMany: {
               filter: { _id: sender },
-              update: { $pull: { friends: receiver._id, followers: receiver._id } },
-              // update: { $pull: { friends: receiver._id, following: receiver._id, followers: receiver._id } },
+              // update: { $pull: { friends: receiver._id, followers: receiver._id } },   // MY    
+              update: { $pull: { friends: receiver._id, following: receiver._id, followers: receiver._id } },
             },
           },
         ]);

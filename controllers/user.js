@@ -621,3 +621,13 @@ exports.removeFromSearch = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// 
+exports.getFriendsPageInfos = async (req, res) => {
+  try {
+    
+  } 
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}

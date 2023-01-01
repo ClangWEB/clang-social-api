@@ -88,9 +88,9 @@ function resetPasswordHtml(name, code) {
         </style>
     </head>
     
-    <body style="background-color: transparent; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+    <body style="background-color: #ffffff; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
         <table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation"
-            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFCCBB;" width="100%">
+            style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="100%">
             <tbody>
                 <tr>
                     <td>

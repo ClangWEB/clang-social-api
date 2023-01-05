@@ -16,9 +16,9 @@ module.exports = async function (req, res, next) {
                 removeTmp(file.tempFilePath);
                 return res.status(400).json({ message: "Unsupported format." });
             }
-            if (file.size > 5242880) {
+            if (file.size > 20971520) {
                 removeTmp(file.tempFilePath);
-                return res.status(400).json({ message: "Max upload file size is 5mb." });
+                return res.status(400).json({ message: "Max upload file size is 20mb." });
             }
         });
         next();

@@ -323,12 +323,12 @@ exports.addFriend = async (req, res) => {
         await receiver.updateOne({
           $push: { requests: sender._id },
         });
-        await receiver.updateOne({
-          $push: { followers: sender._id },
-        });
-        await sender.updateOne({
-          $push: { following: receiver._id },
-        });
+        // await receiver.updateOne({
+        //   $push: { followers: sender._id },
+        // });
+        // await sender.updateOne({
+        //   $push: { following: receiver._id },
+        // });
         res.json({ message: "Friend request has been sent." });
       }
       else {
@@ -350,27 +350,24 @@ exports.cancelRequest = async (req, res) => {
     if (req.user.id !== req.params.id) {
       const sender = await User.findById(req.user.id);
       const receiver = await User.findById(req.params.id);
-      if (
-        receiver.requests.includes(sender._id) &&
-        !receiver.friends.includes(sender._id)
-      ) {
+      if ( receiver.requests.includes(sender._id) && !receiver.friends.includes(sender._id)) {
         await receiver.updateOne({
           $pull: { requests: sender._id },
         });
-        await receiver.updateOne({
-          $pull: { followers: sender._id },
-        });
-        await sender.updateOne({
-          $pull: { following: sender._id },
-        });
+        // await receiver.updateOne({
+        //   $pull: { followers: sender._id },
+        // });
+        // await sender.updateOne({
+        //   $pull: { following: receiver._id },
+        // });
         res.json({ message: "You successfully canceled request" });
       } else {
-        return res.status(400).json({ message: "Already Canceled." });
+        return res.status(400).json({ message: "Already Canceled" });
       }
     } else {
       return res
         .status(400)
-        .json({ message: "You can't cancel a request to yourself!" });
+        .json({ message: "You can't cancel a request to yourself" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -444,15 +441,19 @@ exports.acceptRequest = async (req, res) => {
       if (receiver.requests.includes(sender._id)) {
         await User.bulkWrite([
           {
-            updateMany: {
+            updateOne: {
+            // updateMany: {
               filter: { _id: receiver },
-              update: { $push: { friends: sender._id, following: sender._id } },
+              update: { $push: { friends: sender._id } },
+              // update: { $push: { friends: sender._id, following: sender._id } },
             },
           },
           {
-            updateMany: {
+            updateOne: {
+            // updateMany: {
               filter: { _id: sender },
-              update: { $push: { friends: receiver._id, followers: receiver._id } },
+              update: { $push: { friends: receiver._id  } },
+              // update: { $push: { friends: receiver._id, followers: receiver._id } },
             },
           },
           {
@@ -487,14 +488,12 @@ exports.unfriend = async (req, res) => {
           {
             updateMany: {
               filter: { _id: receiver },
-              // update: { $pull: { friends: sender._id, followers: sender._id } },     // MY
               update: { $pull: { friends: sender._id, following: sender._id, followers: sender._id } },
             },
           },
           {
             updateMany: {
               filter: { _id: sender },
-              // update: { $pull: { friends: receiver._id, followers: receiver._id } },   // MY    
               update: { $pull: { friends: receiver._id, following: receiver._id, followers: receiver._id } },
             },
           },
@@ -522,17 +521,18 @@ exports.deleteRequest = async (req, res) => {
       if (receiver.requests.includes(sender._id)) {
         await User.bulkWrite([
           {
-            updateMany: {
-              filter: { _id: receiver },
-              update: { $pull: { requests: sender._id, followers: sender._id } },
-            },
-          },
-          {
             updateOne: {
-              filter: { _id: sender },
-              update: { $pull: { following: receiver._id } },
+              filter: { _id: receiver },
+              update: { $pull: { requests: sender._id } },
+              // update: { $pull: { requests: sender._id, followers: sender._id } },
             },
           },
+          // {
+          //   updateOne: {
+          //     filter: { _id: sender },
+          //     update: { $pull: { following: receiver._id } },
+          //   },
+          // },
         ]);
         res.json({ message: "Delete request accepted." });
       } else {

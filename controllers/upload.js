@@ -28,17 +28,14 @@ exports.uploadImages = async (req, res) => {
 exports.listImages = async (req, res) => {
     try {
         const { path, sort, max } = req.body;
-        await cloudinary.v2.search
-            .expression(`${path}`)
-            .sort_by("created_at", `${sort}`)
-            .max_results(max)
-            .execute()
-            .then((result) => {
-                res.json(result);
-            })
-            .catch((err) => {
-                console.log(err.error.message);
-            });
+        const result = await cloudinary.v2.search.expression(`${path}`).sort_by("created_at", `${sort}`).max_results(max).execute();
+        res.json(result);
+            // .then((result) => {
+            //     res.json(result);
+            // })
+            // .catch((err) => {
+            //     console.log(err.error.message);
+            // });
     }
     catch (error) {
         return res.status(500).json({ message: error.message });

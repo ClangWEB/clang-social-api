@@ -165,6 +165,8 @@ exports.findUser = async (req, res) => {
 
     if (!user) return res.status(400).json({ message: "Account doesn't exists." });
     return res.status(200).json({
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: user.email,
       picture: user.picture,
     })

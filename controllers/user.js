@@ -169,7 +169,7 @@ exports.findUser = async (req, res) => {
       last_name: user.last_name,
       email: user.email,
       picture: user.picture,
-    })
+    });
   }
   catch (error) {
     res.status(500).json({ message: error.message });

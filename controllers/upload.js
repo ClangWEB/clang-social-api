@@ -57,9 +57,6 @@ const uploadToCloudinary = async (file, path) => {
     });
 };
 
-// DELETE FROM CLOUDINARY
-
-
 // REMOVE TEMP FILES
 const removeTmp = (path) => {
     fs.unlink(path, (err) => {

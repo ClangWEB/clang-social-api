@@ -10,6 +10,16 @@ const generateCode = require("../helpers/generateCode");
 const mongoose = require("mongoose");
 
 
+// WELCOME
+exports.welcome = async (req, res) => {
+  try {
+    res.send("Hello from Clang Social API");
+  } 
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 // LOGIN
 exports.login = async (req, res) => {
   try {
